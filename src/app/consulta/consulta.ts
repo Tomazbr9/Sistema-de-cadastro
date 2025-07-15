@@ -27,9 +27,10 @@ import { Cliente } from '../cadastro/cliente';
   styleUrl: './consulta.scss'
 })
 export class Consulta implements OnInit {
-
+  
+  nomeBusca = '';
   listaClientes: Cliente[] = [];
-  ColunasTable: string[] = ["id", "Nome", "CPF", "Data Nascimento", "Email"];
+  ColunasTable: string[] = ["Id", "Nome", "CPF", "Data Nascimento", "Email"];
 
   constructor(private service: ClienteService){
 
@@ -37,5 +38,9 @@ export class Consulta implements OnInit {
 
   ngOnInit(){
     this.listaClientes = this.service.pesquisarClientes('');
+  }
+
+  pesquisar(){
+    this.listaClientes = this.service.pesquisarClientes(this.nomeBusca);
   }
 }
