@@ -7,6 +7,7 @@ import {MatIconModule} from '@angular/material/icon'
 import { FormsModule } from '@angular/forms';
 import {MatTableModule} from '@angular/material/table'
 import { MatButtonModule } from '@angular/material/button';
+import { Router } from '@angular/router';
 import { ClienteService } from '../cliente.service';
 import { Cliente } from '../cadastro/cliente';
 
@@ -30,9 +31,12 @@ export class Consulta implements OnInit {
   
   nomeBusca = '';
   listaClientes: Cliente[] = [];
-  ColunasTable: string[] = ["Id", "Nome", "CPF", "Data Nascimento", "Email"];
+  ColunasTable: string[] = ["Id", "Nome", "CPF", "Data Nascimento", "Email", "Acoes"];
 
-  constructor(private service: ClienteService){
+  constructor(
+    private service: ClienteService,
+    private router: Router
+  ){
 
   }
 
@@ -42,5 +46,9 @@ export class Consulta implements OnInit {
 
   pesquisar(){
     this.listaClientes = this.service.pesquisarClientes(this.nomeBusca);
+  }
+
+  preparaEditar(id: String){
+    this.router.navigate(['/cadastro'], {queryParams: {"id": id}})
   }
 }
