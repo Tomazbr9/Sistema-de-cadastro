@@ -20,6 +20,11 @@ export class ClienteService {
     );
   }
 
+  buscarClientePorId(id: string) : Cliente | undefined {
+    const clientes = this.obterStorage();
+    return clientes.find(cliente => cliente.id === id);
+  }
+
   pesquisarClientes(nomeBusca: string): Cliente[] {
     const clientes: Cliente[] = this.obterStorage();
 
